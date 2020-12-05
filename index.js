@@ -66,7 +66,7 @@ app.post("/generate_link", async (req, res)=>{
         collection = client.db("guvi_DailyTask(DT)_11-21-2020").collection('email_password_links');
         let random_string = randomstring.generate(64);
         let response = await collection.findOneAndUpdate({"email": data["email"]},{$set:{"random_id": random_string}});
-        mail_detail['to'] = "yeshwanthkonka@yahoo.com"
+        mail_detail['to'] = data["email"]
         mail_detail['html'] = email_template(random_string)
         if(!response['lastErrorObject']['updatedExisting']){
             data['random_id'] = random_string
@@ -87,7 +87,7 @@ app.post("/generate_link", async (req, res)=>{
     }
 })
 
-app.get("/link_validity/:id", async (req, res)=>{
+app.get("/reset_link/:id", async (req, res)=>{
     let data = {"random_id": req.params["id"]};
     let client  = await mongoClient.connect(mongodb_url);
     let collection = client.db("guvi_DailyTask(DT)_11-21-2020").collection('email_password_links');
