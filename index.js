@@ -108,17 +108,14 @@ app.post("/update_password", async (req, res)=>{
         let client  = await mongoClient.connect(mongodb_url);
         let collection = client.db("guvi_DailyTask(DT)_11-21-2020").collection('email_password_links');
         let result = await collection.find(id).toArray();
-        console.log(id, result)
         if(result.length == 0){
             client.close();
             return res.status(400).json({"detail": "Invalid Link request new link"})
         }
         data['email'] = result[0]['email'];
         await collection.deleteOne(id);
-        console.log(data);
         collection = client.db("guvi_DailyTask(DT)_11-21-2020").collection('email_users');
         let response = await collection.findOneAndUpdate({"email": data["email"]},{$set:{"password": data["password"]}});
-        console.log(response);
         if(!response['lastErrorObject']['updatedExisting']){
             return res.status(500).json({"detail": "Something Went Wrong"})
         }
