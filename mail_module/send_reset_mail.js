@@ -20,7 +20,7 @@ function email_template(token){
             <td>
                 <img src="https://www.razlee.com/wp-content/uploads/2017/08/Password-Reset-1-768x768-1.png" height="200px" width="200px">
                 <div>Reset Password Link.</div>
-                <a href="${process.env.reset_host}/reset_link/${token}" target="_blank">Click Here</a>
+                <a href="${process.env.reset_host}reset_link/${token}" target="_blank">Click Here</a>
                 <div>To reset your password for our site</div>
             </td>
         </tr>

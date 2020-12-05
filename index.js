@@ -87,7 +87,7 @@ app.post("/generate_link", async (req, res)=>{
     }
 })
 
-app.get("/link_validity", async (req, res)=>{
+app.get("/link_validity/:id", async (req, res)=>{
     let data = {"random_id": req.params["id"]};
     let client  = await mongoClient.connect(mongodb_url);
     let collection = client.db("guvi_DailyTask(DT)_11-21-2020").collection('email_password_links');
