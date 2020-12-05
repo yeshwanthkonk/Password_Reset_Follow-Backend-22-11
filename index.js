@@ -97,7 +97,7 @@ app.get("/reset_link/:id", async (req, res)=>{
         return res.redirect(process.env.frontend_host+"forgot_password.html?q='Invalid Link'")
     }
     else{
-        return res.redirect(process.env.frontend_host+`reset_password.html?id=${data}`)
+        return res.redirect(process.env.frontend_host+`reset_password.html?id=${data["random_id"]}`)
     }
 })
 
